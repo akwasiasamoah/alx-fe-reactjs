@@ -1,20 +1,18 @@
-import PropTypes from "prop-types";
+import { useContext } from "react"; // Step 1 and 2
+import { UserContext } from "../UserContext"; // Step 2 (Adjust the import path as needed)
 
-const UserProfile = (props) => (
-  <div style={{ border: "1px solid gray", padding: "10px", margin: "10px" }}>
-    <h2 style={{ color: "blue" }}>{props.name}</h2>
-    <p>
-      Age: <span style={{ fontWeight: "bold" }}>{props.age}</span>
-    </p>
-    <p>Bio: {props.bio}</p>
-  </div>
-);
+const UserProfile = () => {
+  const userData = useContext(UserContext); // Access the context
 
-// Define prop types for type-checking
-UserProfile.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
-  bio: PropTypes.string.isRequired,
+  return (
+    <div style={{ border: "1px solid gray", padding: "10px", margin: "10px" }}>
+      <h2 style={{ color: "blue" }}>{userData.name}</h2>
+      <p>
+        Age: <span style={{ fontWeight: "bold" }}>{userData.age}</span>
+      </p>
+      <p>Bio: {userData.bio}</p>
+    </div>
+  );
 };
 
 export default UserProfile;
