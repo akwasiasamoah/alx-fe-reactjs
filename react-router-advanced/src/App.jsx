@@ -1,4 +1,5 @@
 // src/App.jsx
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
@@ -16,7 +17,8 @@ function App() {
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
         </Route>
-        <Route path="/post/:postId" element={<BlogPost />} />
+        <Route path="/post/:id" element={<BlogPost />} />{" "}
+        {/* Dynamic route for blog posts */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
