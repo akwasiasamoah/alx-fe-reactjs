@@ -7,6 +7,7 @@ const TodoList = () => {
     { id: 2, text: "Learn Testing", completed: false },
   ]);
 
+  //testing component
   const [newTodo, setNewTodo] = useState("");
 
   const handleAddTodo = (e) => {
