@@ -1,48 +1,25 @@
-// src/recipeStore.js
-import { create } from "zustand";
+import create from "zustand";
 
 const useRecipeStore = create((set) => ({
   recipes: [],
-  searchTerm: "",
-  filteredRecipes: [],
-  setSearchTerm: (term) =>
-    set((state) => {
-      const updatedSearchTerm = term;
-      const filteredRecipes = state.recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(updatedSearchTerm.toLowerCase())
-      );
-      return {
-        searchTerm: updatedSearchTerm,
-        filteredRecipes,
-      };
-    }),
-  addRecipe: (newRecipe) =>
+  favorites: [],
+  addFavorite: (recipeId) =>
     set((state) => ({
-      recipes: [...state.recipes, newRecipe],
-      filteredRecipes: [...state.filteredRecipes, newRecipe], // Update filtered list as well
+      favorites: [...state.favorites, recipeId],
     })),
-  deleteRecipe: (id) =>
+  removeFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    })),
+  recommendations: [],
+  generateRecommendations: () =>
     set((state) => {
-      const updatedRecipes = state.recipes.filter((recipe) => recipe.id !== id);
-      return {
-        recipes: updatedRecipes,
-        filteredRecipes: updatedRecipes.filter((recipe) =>
-          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-        ), // Update filtered list
-      };
-    }),
-  updateRecipe: (updatedRecipe) =>
-    set((state) => {
-      const updatedRecipes = state.recipes.map((recipe) =>
-        recipe.id === updatedRecipe.id ? updatedRecipe : recipe
+      // Mock implementation for recommendations based on favorites
+      const recommended = state.recipes.filter(
+        (recipe) => state.favorites.includes(recipe.id) && Math.random() > 0.5
       );
-      return {
-        recipes: updatedRecipes,
-        filteredRecipes: updatedRecipes.filter((recipe) =>
-          recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-        ), // Update filtered list
-      };
+      return { recommendations: recommended };
     }),
 }));
 
-export default useRecipeStore;
+export { useRecipeStore };
