@@ -1,6 +1,5 @@
 // src/App.jsx
-
-import FormikForm from "./components/FormikForm";
+import FormikForm from "./components/FormikForm"; // Ensure this matches the file name
 
 const App = () => {
   return (
