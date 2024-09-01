@@ -1,5 +1,5 @@
 // src/components/PostsComponent.jsx
-
+import React from "react";
 import { useQuery } from "react-query";
 
 const fetchPosts = async () => {
@@ -13,7 +13,13 @@ const fetchPosts = async () => {
 const PostsComponent = () => {
   const { data, error, isLoading, isError, refetch } = useQuery(
     "posts",
-    fetchPosts
+    fetchPosts,
+    {
+      cacheTime: 1000 * 60 * 5, // Cache for 5 minutes
+      staleTime: 1000 * 60, // Data is fresh for 1 minute
+      refetchOnWindowFocus: true, // Refetch when the window gains focus
+      keepPreviousData: true, // Keep previous data while fetching new data
+    }
   );
 
   if (isLoading) return <div>Loading...</div>;
